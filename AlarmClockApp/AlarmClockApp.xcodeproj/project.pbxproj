@@ -13,6 +13,9 @@
 		DA702C2F2A9F589E00CE04F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA702C2D2A9F589E00CE04F2 /* Main.storyboard */; };
 		DA702C312A9F589F00CE04F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA702C302A9F589F00CE04F2 /* Assets.xcassets */; };
 		DA702C342A9F589F00CE04F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA702C322A9F589F00CE04F2 /* LaunchScreen.storyboard */; };
+		DA702C442A9F5E1B00CE04F2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA702C432A9F5E1B00CE04F2 /* TabBarController.swift */; };
+		DA702C472A9F5E4F00CE04F2 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA702C462A9F5E4F00CE04F2 /* AlarmViewController.swift */; };
+		DA702C4C2A9F5EE500CE04F2 /* SoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA702C4B2A9F5EE500CE04F2 /* SoundsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		DA702C302A9F589F00CE04F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA702C332A9F589F00CE04F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA702C352A9F589F00CE04F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA702C432A9F5E1B00CE04F2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		DA702C462A9F5E4F00CE04F2 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		DA702C4B2A9F5EE500CE04F2 /* SoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,9 @@
 		DA702C3B2A9F58D500CE04F2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				DA702C482A9F5EB700CE04F2 /* Sounds Screen */,
+				DA702C452A9F5E3200CE04F2 /* Alarm Screen */,
+				DA702C422A9F5E0500CE04F2 /* Tab Bar */,
 				DA702C412A9F592700CE04F2 /* Launch Screen */,
 				DA702C402A9F591A00CE04F2 /* Main Screen */,
 			);
@@ -121,6 +130,30 @@
 				DA702C322A9F589F00CE04F2 /* LaunchScreen.storyboard */,
 			);
 			path = "Launch Screen";
+			sourceTree = "<group>";
+		};
+		DA702C422A9F5E0500CE04F2 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				DA702C432A9F5E1B00CE04F2 /* TabBarController.swift */,
+			);
+			path = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		DA702C452A9F5E3200CE04F2 /* Alarm Screen */ = {
+			isa = PBXGroup;
+			children = (
+				DA702C462A9F5E4F00CE04F2 /* AlarmViewController.swift */,
+			);
+			path = "Alarm Screen";
+			sourceTree = "<group>";
+		};
+		DA702C482A9F5EB700CE04F2 /* Sounds Screen */ = {
+			isa = PBXGroup;
+			children = (
+				DA702C4B2A9F5EE500CE04F2 /* SoundsViewController.swift */,
+			);
+			path = "Sounds Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,7 +228,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA702C2C2A9F589E00CE04F2 /* ViewController.swift in Sources */,
+				DA702C442A9F5E1B00CE04F2 /* TabBarController.swift in Sources */,
+				DA702C4C2A9F5EE500CE04F2 /* SoundsViewController.swift in Sources */,
 				DA702C282A9F589E00CE04F2 /* AppDelegate.swift in Sources */,
+				DA702C472A9F5E4F00CE04F2 /* AlarmViewController.swift in Sources */,
 				DA702C2A2A9F589E00CE04F2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
