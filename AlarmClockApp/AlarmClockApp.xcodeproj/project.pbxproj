@@ -16,6 +16,9 @@
 		DA702C442A9F5E1B00CE04F2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA702C432A9F5E1B00CE04F2 /* TabBarController.swift */; };
 		DA702C472A9F5E4F00CE04F2 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA702C462A9F5E4F00CE04F2 /* AlarmViewController.swift */; };
 		DA702C4C2A9F5EE500CE04F2 /* SoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA702C4B2A9F5EE500CE04F2 /* SoundsViewController.swift */; };
+		DA702C542A9F887F00CE04F2 /* alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA702C532A9F887F00CE04F2 /* alarm_sound.wav */; };
+		DA702C572A9F897200CE04F2 /* natural.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA702C552A9F897100CE04F2 /* natural.wav */; };
+		DA702C582A9F897200CE04F2 /* energy.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA702C562A9F897100CE04F2 /* energy.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		DA702C432A9F5E1B00CE04F2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DA702C462A9F5E4F00CE04F2 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		DA702C4B2A9F5EE500CE04F2 /* SoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsViewController.swift; sourceTree = "<group>"; };
+		DA702C532A9F887F00CE04F2 /* alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm_sound.wav; sourceTree = "<group>"; };
+		DA702C552A9F897100CE04F2 /* natural.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = natural.wav; sourceTree = "<group>"; };
+		DA702C562A9F897100CE04F2 /* energy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = energy.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,7 @@
 		DA702C3C2A9F58E500CE04F2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				DA702C522A9F885600CE04F2 /* Sounds */,
 				DA702C3F2A9F590200CE04F2 /* Plists */,
 				DA702C3E2A9F58F700CE04F2 /* Assets */,
 				DA702C3D2A9F58EB00CE04F2 /* Delegates */,
@@ -156,6 +163,16 @@
 			path = "Sounds Screen";
 			sourceTree = "<group>";
 		};
+		DA702C522A9F885600CE04F2 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				DA702C552A9F897100CE04F2 /* natural.wav */,
+				DA702C562A9F897100CE04F2 /* energy.wav */,
+				DA702C532A9F887F00CE04F2 /* alarm_sound.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,8 +231,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA702C542A9F887F00CE04F2 /* alarm_sound.wav in Resources */,
 				DA702C342A9F589F00CE04F2 /* LaunchScreen.storyboard in Resources */,
 				DA702C312A9F589F00CE04F2 /* Assets.xcassets in Resources */,
+				DA702C572A9F897200CE04F2 /* natural.wav in Resources */,
+				DA702C582A9F897200CE04F2 /* energy.wav in Resources */,
 				DA702C2F2A9F589E00CE04F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

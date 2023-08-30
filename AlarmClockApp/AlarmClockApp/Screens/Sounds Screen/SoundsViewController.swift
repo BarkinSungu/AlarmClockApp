@@ -8,7 +8,7 @@ import UIKit
 
 class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var testDAtaa: String = "Sound"
+    var soundFiles: [String] = ["natural", "energy", "alarm_sound"]
     
     let segmentedControl: UISegmentedControl = {
         let items = ["Sounds", "Playlists", "Songs"]
@@ -29,11 +29,17 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.backgroundColor = .white
         title = "Sounds"
         
-        // Segmented Control'ü view'e ekle
+        setUI()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    func setUI(){
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
         
-        // Constraints ayarları
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -44,27 +50,20 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             // Sounds seçildiğinde yapılacak işlemler
-            testDAtaa = "Sound"
             tableView.reloadData()
             break
         case 1:
             // Playlists seçildiğinde yapılacak işlemler
-            testDAtaa = "Playlist"
             tableView.reloadData()
             break
         case 2:
             // Songs seçildiğinde yapılacak işlemler
-            testDAtaa = "Song"
             tableView.reloadData()
             break
         default:
@@ -72,16 +71,23 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    // UITableView Delegate ve DataSource fonksiyonları
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TableView'da gösterilecek hücre sayısı
-        return 10 // Örnek olarak 10 hücre
+        return soundFiles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "\(testDAtaa) Row \(indexPath.row + 1)"
+        cell.textLabel?.text = soundFiles[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedSoundFileName = soundFiles[indexPath.row]
+        
+        print("Selected sound file: \(selectedSoundFileName)")
+        
     }
 }
 
