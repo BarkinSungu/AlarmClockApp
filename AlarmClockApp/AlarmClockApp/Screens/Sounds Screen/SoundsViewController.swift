@@ -13,6 +13,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var soundFiles: [String] = ["natural", "energy", "alarm_sound"]
     var songs: [String] = []
+    var playlists: [String] = []
     
     let segmentedControl: UISegmentedControl = {
         let items = ["Sounds", "Playlists", "Songs"]
@@ -67,7 +68,10 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.reloadData()
             break
         case 1:
-            tableViewList = []
+            requestMediaLibraryAccess()
+            loadPlaylists()
+            tableViewList = playlists
+            print(playlists)
             tableView.reloadData()
             break
         case 2:
@@ -93,6 +97,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
         
     func loadMediaItems() {
+        songs.removeAll()
         let mediaQuery = MPMediaQuery.songs()
         if let songItems = mediaQuery.items {
             for i in songItems{
@@ -103,6 +108,20 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+
+    func loadPlaylists() {
+        playlists.removeAll()
+        let playlistQuery = MPMediaQuery.playlists()
+        if let playlistItems = playlistQuery.collections as? [MPMediaPlaylist] {
+            for i in playlistItems{
+                playlists.append(i.name ?? "")
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewList.count
