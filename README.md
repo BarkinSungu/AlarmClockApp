@@ -9,13 +9,20 @@ The Alarm Clock App is designed to provide a simple and effective way to set ala
 - Customize your alarm sound by choosing from a variety of pre-installed sounds within the app.
 - If your device supports it, you can also set your own sound from the audio library as your alarm tone.
 
+## Note about Notifications
+
+Please note that notifications work on the iOS simulator as well, allowing you to experience the app's alarm and notification features even when using a virtual device.
+
+However, for the best experience, it's recommended to test the app on a physical iOS device to fully observe the alarm sounds and notification behavior.
+
+
 ## Getting Started
 
 To start using the Alarm Clock App, follow these steps:
 
 1. Download or clone the repository to your local machine.
 2. Open the project in Xcode.
-3. Build and run the app on a simulator or a physical iOS device.
+3. Build and run the app on a physical iOS device.
 4. Set alarms with your preferred settings and enjoy a reliable wake-up experience.
 
 ## Alarm Sounds
