@@ -11,6 +11,7 @@ class AlarmViewController: UIViewController {
     
     var alarmSoundName: String = "alarm_sound"
     
+    //UI elements
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
@@ -41,6 +42,10 @@ class AlarmViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectSound(_:)), name: Notification.Name("SoundSelected"), object: nil)
         
+        setUI()
+    }
+    
+    func setUI(){
         view.addSubview(datePicker)
         view.addSubview(setAlarmButton)
         view.addSubview(soundLabel)
@@ -115,6 +120,7 @@ class AlarmViewController: UIViewController {
         print("sound changed with: \(soundName)")
     }
     
+    //The function that receives data from the selected row in SoundsViewController to set it as an alarm sound.
     @objc func didSelectSound(_ notification: Notification) {
             if let soundName = notification.object as? String {
                 setNotificationSound(soundName: soundName)

@@ -15,6 +15,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var songs: [String] = []
     var playlists: [String] = []
     
+    //UI Elements
     let segmentedControl: UISegmentedControl = {
         let items = ["Sounds", "Playlists", "Songs"]
         let control = UISegmentedControl(items: items)
@@ -87,6 +88,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    //For Media Library Access
     func requestMediaLibraryAccess() {
         MPMediaLibrary.requestAuthorization { status in
             if status == .authorized {
@@ -97,6 +99,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
         
+    //Load Songs From Local Library
     func loadMediaItems() {
         songs.removeAll()
         let mediaQuery = MPMediaQuery.songs()
@@ -110,6 +113,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
+    //Load Playlists From Local Library
     func loadPlaylists() {
         playlists.removeAll()
         let playlistQuery = MPMediaQuery.playlists()
@@ -123,6 +127,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    //send data to AlarmViewController.
     func soundSelected(_ soundName: String) {
         NotificationCenter.default.post(name: Notification.Name("SoundSelected"), object: soundName)
         navigationController?.popViewController(animated: true)
