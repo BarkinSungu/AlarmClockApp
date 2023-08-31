@@ -27,6 +27,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.backgroundColor = .white
+        table.tintColor = .white
         return table
     }()
     
@@ -121,6 +122,11 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+    
+    func soundSelected(_ soundName: String) {
+        NotificationCenter.default.post(name: Notification.Name("SoundSelected"), object: soundName)
+        navigationController?.popViewController(animated: true)
+    }
 
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -129,6 +135,8 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
         cell.textLabel?.text = tableViewList[indexPath.row]
         return cell
     }
@@ -137,6 +145,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.deselectRow(at: indexPath, animated: true)
         
         let selectedSoundFileName = tableViewList[indexPath.row]
+        soundSelected(selectedSoundFileName)
         
         print("Selected sound file: \(selectedSoundFileName)")
         

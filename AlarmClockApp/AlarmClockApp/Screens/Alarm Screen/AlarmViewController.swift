@@ -9,6 +9,8 @@ import UIKit
 
 class AlarmViewController: UIViewController {
     
+    var alarmSoundName: String = "alarm_sound"
+    
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
@@ -27,7 +29,7 @@ class AlarmViewController: UIViewController {
     
     let soundLabel: UILabel = {
         let label = UILabel()
-        label.text = "Alarm Sound: Default"
+        label.text = "Alarm Sound: alarm_sound"
         label.textColor = .black
         return label
     }()
@@ -36,6 +38,8 @@ class AlarmViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Alarm"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectSound(_:)), name: Notification.Name("SoundSelected"), object: nil)
         
         view.addSubview(datePicker)
         view.addSubview(setAlarmButton)
@@ -60,8 +64,68 @@ class AlarmViewController: UIViewController {
         ])
     }
     
-    @objc func setAlarm(){
-        
+    func scheduleNotification(at date: Date) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if granted {
+                let content = UNMutableNotificationContent()
+                content.title = "Wake up!"
+                content.body = "Time to wake up!"
+                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(self.alarmSoundName).wav"))
+                
+                let triggerDate = Calendar.current.dateComponents([.hour, .minute], from: date)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: "alarm", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Error scheduling notification: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func setAlarm() {
+        var alarmTime = datePicker.date
+        alarmTime = adjustSelectedDateIfNeeded(selectedDate: alarmTime)
+        scheduleNotification(at: alarmTime)
+        print("alarm time set for: \(alarmTime) with \(alarmSoundName)")
+
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: alarmTime)
+        let minute = calendar.component(.minute, from: alarmTime)
+        self.showAlert(message: "Alarm set for \(hour):\(minute).")
+    }
+    
+    //If selected date is earlier now set alarm for tomorrow
+    func adjustSelectedDateIfNeeded(selectedDate: Date) -> Date {
+        let calendar = Calendar.current
+        let currentDate = Date()
+
+        if selectedDate <= currentDate {
+            let adjustedDate = calendar.date(byAdding: .day, value: 1, to: selectedDate)!
+            return adjustedDate
+        }
+        return selectedDate
+    }
+    
+    func setNotificationSound(soundName:String){
+        soundLabel.text = "Alarm Sound: \(soundName)"
+        alarmSoundName = soundName
+        print("sound changed with: \(soundName)")
+    }
+    
+    @objc func didSelectSound(_ notification: Notification) {
+            if let soundName = notification.object as? String {
+                setNotificationSound(soundName: soundName)
+            }
+        }
+
+    
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Info", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
  
 }
