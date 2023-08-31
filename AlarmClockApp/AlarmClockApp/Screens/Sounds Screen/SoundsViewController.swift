@@ -5,10 +5,14 @@
 //  Created by Barkın Süngü on 30.08.2023.
 //
 import UIKit
+import MediaPlayer
 
 class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var tableViewList: [String] = []
+    
     var soundFiles: [String] = ["natural", "energy", "alarm_sound"]
+    var songs: [String] = []
     
     let segmentedControl: UISegmentedControl = {
         let items = ["Sounds", "Playlists", "Songs"]
@@ -21,6 +25,7 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .white
         return table
     }()
     
@@ -28,6 +33,8 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Sounds"
+        
+        tableViewList = soundFiles
         
         setUI()
         
@@ -55,15 +62,19 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            // Sounds seçildiğinde yapılacak işlemler
+            tableViewList = soundFiles
+            print(soundFiles)
             tableView.reloadData()
             break
         case 1:
-            // Playlists seçildiğinde yapılacak işlemler
+            tableViewList = []
             tableView.reloadData()
             break
         case 2:
-            // Songs seçildiğinde yapılacak işlemler
+            requestMediaLibraryAccess()
+            loadMediaItems()
+            tableViewList = songs
+            print(songs)
             tableView.reloadData()
             break
         default:
@@ -71,20 +82,42 @@ class SoundsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func requestMediaLibraryAccess() {
+        MPMediaLibrary.requestAuthorization { status in
+            if status == .authorized {
+                self.loadMediaItems()
+            } else {
+                print("Media library access denied.")
+            }
+        }
+    }
+        
+    func loadMediaItems() {
+        let mediaQuery = MPMediaQuery.songs()
+        if let songItems = mediaQuery.items {
+            for i in songItems{
+                songs.append(i.title ?? "")
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return soundFiles.count
+        return tableViewList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = soundFiles[indexPath.row]
+        cell.textLabel?.text = tableViewList[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let selectedSoundFileName = soundFiles[indexPath.row]
+        let selectedSoundFileName = tableViewList[indexPath.row]
         
         print("Selected sound file: \(selectedSoundFileName)")
         
